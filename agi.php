@@ -418,6 +418,20 @@ class AGI {
 	public function say_number($number, $escape_digits='') {
 		return $this->evaluate("SAY NUMBER $number \"$escape_digits\"");
 	}
+	
+	/**
+	 * Say a given character string, returning early if any of the given DTMF digits are received on the channel.
+	 * Returns 0 if playback completes without a digit being pressed, or the ASCII numerical value of the digit if one was pressed or -1 on error/hangup.
+	 *
+	 * @link https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+AGICommand_say+alpha
+	 * @param integer $number
+	 * @param string $escape_digits
+	 * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+	 * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+	 */
+	public function say_alpha($number, $escape_digits='') {
+		return $this->evaluate("SAY ALPHA $number \"$escape_digits\"");
+	}
 
 	/**
 	 * Say the given character string, returning early if any of the given DTMF escape digits are received on the channel.
